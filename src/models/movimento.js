@@ -34,4 +34,7 @@ const Movimento = database.define('movimento', {
         
 });
 
+Movimento.belongsTo(Produto, { foreignKey: 'produtoId' });
+Movimento.belongsTo(Deposito, { foreignKey: 'depositoId' });
+
 module.exports = Movimento;

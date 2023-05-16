@@ -17,4 +17,6 @@ const Estoque = database.define('estoque', {
     }
 });
 
+Estoque.belongsTo(Produto, { foreignKey: 'produtoId' });
+
 module.exports = Estoque;
