@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const auth = require ('./auth.js');
-const Cliente = require('./models/cliente.js');
 require('dotenv').config();
 
 
@@ -10,34 +9,18 @@ require('dotenv').config();
 (async () => {
     const database = require('./db.js');
     const Cliente = require('./models/cliente.js');
-	const Produto = require('./models/produto.js');
-    const Deposito = require('./models/deposito.js');
-    await database.sync({alter:true});
+    const Estoque = require('./models/estoque.js');
+    const Movimento = require('./models/movimento.js');
+    const Produto = require('./models/produto.js');
 
-    await Produto.create(
-            {
-                id: 4,
-                nome: 'Cadeira de balanço',
-                descricao: 'Cadeira de balanço de madeira'
-            }
-        );
+    try{
+        const res = await database.sync({alter:true});
+        console.log(res);
+    }
+    catch(error){
+        console.log(error)
+    }
     
-    await Cliente.create(
-        {
-                id: 4,
-                cpf: '00750692960',
-                nome: 'Luciane Kuritza',
-                email: 'lskuritza@gmail.com'
-            }
-        );
-
-    await Deposito.create(
-            {
-                id: 4,
-                nome: 'DepoCuritiba',
-                filial: 'Curitiba/PR'
-            }
-        );
 })();
 
 app.use(express.json());
@@ -60,6 +43,6 @@ app.post('/user/save', auth.verificaToken, (req,res) => {
 
 
 app.listen(port, () => {
-    console.log(`Servido de pé na porta ${port}`)
+    console.log(`Servidor de pé na porta ${port}`)
 });
 

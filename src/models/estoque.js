@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const database = require('../db.js');
+const Movimento = require('./movimento.js');
 
 const Estoque = database.define('estoque', {
     id:{
@@ -17,6 +18,7 @@ const Estoque = database.define('estoque', {
     }
 });
 
-Estoque.belongsTo(Produto, { foreignKey: 'produtoId' });
+// produto e estoque tem quer ser feito associação 1 para 1
+Estoque.hasMany(Movimento);
 
 module.exports = Estoque;

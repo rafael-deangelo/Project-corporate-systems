@@ -1,4 +1,3 @@
-// produto e estoque tem quer ser feito associação 1 para 1
 // 1 MOVIMENTO possui 1 PRODUTO e 1 MOVIMENTO possui 1 DEPÓSITO
 // COMO FAZER ABAIXO, ELE VAI CRIAR AUTOMATICAMENTE
 // https://medium.com/@eth3rnit3/sequelize-relationships-ultimate-guide-f26801a75554
@@ -7,6 +6,7 @@
 
 const Sequelize = require('sequelize');
 const database = require('../db.js');
+const Movimento = require('./movimento.js');
 
 const Produto = database.define('produto', {
     id:{
@@ -24,6 +24,8 @@ const Produto = database.define('produto', {
     }
 });
 
-Produto.hasOne(Estoque, { foreignKey: 'produtoId' });
+// produto e estoque tem quer ser feito associação 1 para 1
+Produto.hasMany(Movimento);
+
 
 module.exports = Produto;
