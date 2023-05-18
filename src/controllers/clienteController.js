@@ -1,114 +1,83 @@
-// AQUI SÓ PRECI    SA CHAMAR PORQUE O SEQUELIZE JÁ CRIA OS CRUDS AUTOMATICAMENTE
-const Cliente = require("./models/cliente.js");
+const Cliente = require("../models/cliente.js");
 
-Cliente.create({
-  id: 1,
-  cpf: "123456789",
-  nome: "AlunosPositivo",
-  email: "aluno@positivo.com",
-})
-  .then((cliente) => {
-    console.log("Cliente criado:", cliente);
-  })
-  .catch((error) => {
-    console.error("Erro ao criar cliente:", error);
-  });
+exports.criarCliente = (req, res) => {
+  const clienteData = req.body; // Obtenha os dados do cliente do corpo da requisição
 
-Cliente.findAll()
-  .then((clientes) => {
-    console.log("Clientes encontrados:", clientes);
-  })
-  .catch((error) => {
-    console.error("Erro ao ler clientes:", error);
-  });
+  Cliente.create(clienteData)
+    .then((cliente) => {
+      console.log('Cliente criado:', cliente);
+      res.status(200).json({ message: 'Cliente criado com sucesso', cliente });
+    })
+    .catch((error) => {
+      console.error('Erro ao criar cliente:', error);
+      res.status(500).json({ error: 'Erro ao criar cliente' });
+    });
+};
 
-Cliente.findByPk(1)
-  .then((cliente) => {
-    console.log("Cliente encontrado:", cliente);
-  })
-  .catch((error) => {
-    console.error("Erro ao buscar cliente:", error);
-  });
+exports.buscarClientes = (req, res) => {
+  Cliente.findAll()
+    .then((clientes) => {
+      console.log('Clientes encontrados:', clientes);
+      res.status(200).json({ message: 'Clientes encontrados com sucesso', clientes });
+    })
+    .catch((error) => {
+      console.error('Erro ao ler clientes:', error);
+      res.status(500).json({ error: 'Erro ao ler clientes' });
+    });
+};
 
-Cliente.update({ nome: "Novo nome" }, { where: { id: 1 } })
-  .then((result) => {
-    console.log("Cliente atualizado:", result);
-  })
-  .catch((error) => {
-    console.error("Erro ao atualizar cliente:", error);
-  });
+exports.buscarClientePorId = (req, res) => {
+  const clienteId = req.params.id; // Obtenha o ID do cliente dos parâmetros da requisição
 
-Cliente.destroy({ where: { id: 1 } })
-  .then((result) => {
-    console.log("Cliente excluído:", result);
-  })
-  .catch((error) => {
-    console.error("Erro ao excluir cliente:", error);
-  });
+  Cliente.findByPk(clienteId)
+    .then((cliente) => {
+      if (!cliente) {
+        return res.status(404).json({ error: 'Cliente não encontrado' });
+      }
 
-// // Se fosse chamado em um controller sem a necessidade do sequelize seria:
+      console.log('Cliente encontrado:', cliente);
+      res.status(200).json({ message: 'Cliente encontrado com sucesso', cliente });
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar cliente:', error);
+      res.status(500).json({ error: 'Erro ao buscar cliente' });
+    });
+};
 
-// const express = require("express");
-// const router = express.Router();
-// const Cliente = require("../models/cliente");
+exports.atualizarCliente = (req, res) => {
+  const clienteId = req.params.id; // Obtenha o ID do cliente dos parâmetros da requisição
+  const novoNome = req.body.nome; // Obtenha o novo nome do cliente do corpo da requisição
 
-// // Criar um novo cliente
-// router.post("/clientes", (req, res) => {
-//   const { id, cpf, nome, email } = req.body;
+  Cliente.update({ nome: novoNome }, { where: { id: clienteId } })
+    .then((result) => {
+      if (result[0] === 0) {
+        return res.status(404).json({ error: 'Cliente não encontrado' });
+      }
 
-//   Cliente.create({ id, cpf, nome, email })
-//     .then((cliente) => {
-//       res.json(cliente);
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ error: "Erro ao criar cliente" });
-//     });
-// });
+      console.log('Cliente atualizado:', result);
+      res.status(200).json({ message: 'Cliente atualizado com sucesso', result });
+    })
+    .catch((error) => {
+      console.error('Erro ao atualizar cliente:', error);
+      res.status(500).json({ error: 'Erro ao atualizar cliente' });
+    });
+};
 
-// // Ler todos os clientes
-// router.get("/clientes", (req, res) => {
-//   Cliente.findAll()
-//     .then((clientes) => {
-//       res.json(clientes);
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ error: "Erro ao ler clientes" });
-//     });
-// });
+exports.excluirCliente = (req, res) => {
+  const clienteId = req.params.id; // Obtenha o ID do cliente dos parâmetros da requisição
 
-// // Atualizar um cliente existente
-// router.put("/clientes/:id", (req, res) => {
-//   const clienteId = req.params.id;
-//   const { nome } = req.body;
+  Cliente.destroy({ where: { id: clienteId } })
+    .then((result) => {
+      if (result === 0) {
+        return res.status(404).json({ error: 'Cliente não encontrado' });
+      }
 
-//   Cliente.update({ nome }, { where: { id: clienteId } })
-//     .then((result) => {
-//       if (result[0] === 0) {
-//         res.status(404).json({ error: "Cliente não encontrado" });
-//       } else {
-//         res.json({ message: "Cliente atualizado com sucesso" });
-//       }
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ error: "Erro ao atualizar cliente" });
-//     });
-// });
+      console.log('Cliente excluído:', result);
+      res.status(200).json({ message: 'Cliente excluído com sucesso', result });
+    })
+    .catch((error) => {
+      console.error('Erro ao excluir cliente:', error);
+      res.status(500).json({ error: 'Erro ao excluir cliente' });
+    });
+};
 
-// // Excluir um cliente existente
-// router.delete("/clientes/:id", (req, res) => {
-//   const clienteId = req.params.id;
-
-//   Cliente.destroy({ where: { id: clienteId } })
-//     .then((result) => {
-//       if (result === 0) {
-//         res.status(404).json({ error: "Cliente não encontrado" });
-//       } else {
-//         res.json({ message: "Cliente excluído com sucesso" });
-//       }
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ error: "Erro ao excluir cliente" });
-//     });
-// });
-
-// module.exports = router;
