@@ -1,7 +1,7 @@
 const Produto = require('./models/produto');
 const Estoque = require('./models/estoque');
 
-// Criar um novo produto com um estoque associado
+// RAFA Criar um novo produto com um estoque associado
 Produto.create({
   nome: 'Nome do Produto',
   descricao: 'Descrição do Produto',

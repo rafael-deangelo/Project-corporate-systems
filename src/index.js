@@ -3,6 +3,8 @@ const app = express();
 const port = 3000;
 //const auth = require ('./auth.js');
 const clienteController = require('./controllers/clienteController');
+const estoqueController = require('./controllers/estoqueController');
+const movimentoController = require('./controllers/movimentoController');
 require('dotenv').config();
 
 
@@ -37,6 +39,17 @@ app.get('/clientes/:id', clienteController.buscarClientePorId);
 app.put('/clientes/:id', clienteController.atualizarCliente);
 app.delete('/clientes/:id', clienteController.excluirCliente);
 
+app.post('/CriaEstoque', estoqueController.criarEstoque);
+app.get('/estoques', estoqueController.buscarEstoques);
+app.get('/estoques/:id', estoqueController.buscarEstoquePorId);
+app.put('/estoque/:id', estoqueController.atualizarEstoque);
+app.delete('/estoques/:id', estoqueController.excluirEstoque);
+
+app.post('/criaMovimento', movimentoController.criarMovimento);
+app.get('/movimentos', movimentoController.buscarMovimentos);
+app.get('/movimentos/:id', movimentoController.buscarMovimentoPorId);
+app.put('/movimentos/:id', movimentoController.atualizarMovimento);
+app.delete('/movimentos/:id', movimentoController.excluirMovimento);
 
 
 app.listen(port, () => {
