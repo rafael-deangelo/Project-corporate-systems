@@ -116,15 +116,4 @@ exports.excluirProduto = (req, res) => {
 //   }
 // }
 
-// Buscar um produto existente e seu estoque associado
-Produto.findOne({
-  where: { id: 1 },
-  include: [Estoque],
-})
-  .then((produto) => {
-    console.log("Produto encontrado:", produto.toJSON());
-    console.log("Estoque associado:", produto.Estoque.toJSON());
-  })
-  .catch((error) => {
-    console.error("Erro ao buscar o produto:", error);
-  });
+
