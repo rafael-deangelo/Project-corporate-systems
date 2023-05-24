@@ -44,7 +44,7 @@ exports.buscarProdutos = (req, res) => {
 exports.buscarProdutoPorId = (req, res) => {
   const produtoId = req.params.id;
 
-  Estoque.findByPk(produtoId)
+  Produto.findByPk(produtoId)
     .then((produto) => {
       if (!produto) {
         return res.status(404).json({ error: "Produto não encontrado" });
