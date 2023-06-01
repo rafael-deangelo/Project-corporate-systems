@@ -6,6 +6,7 @@ const clienteController = require('./controllers/clienteController');
 const estoqueController = require('./controllers/estoqueController');
 const movimentoController = require('./controllers/movimentoController');
 const produtoController = require('./controllers/produtoController');
+const atoDeCompraController = require('./controllers/atoDeCompraController');
 
 require('dotenv').config();
 
@@ -58,6 +59,8 @@ app.get('/produtos', produtoController.buscarProdutos);
 app.get('/produtos/:id', produtoController.buscarProdutoPorId);
 app.put('/produtos/:id', produtoController.atualizarProduto);
 app.delete('/produtos/:id', produtoController.excluirProduto);
+
+app.post('/atoDeCompra', atoDeCompraController.criarAtoDeCompra);
 
 app.listen(port, () => {
     console.log(`Servidor de pé na porta ${port}`)
