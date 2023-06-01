@@ -1,10 +1,10 @@
-const Movimento = require('./models/movimento');
-const Produto = require('./models/produto');
-const Deposito = require('./models/deposito');
+const Movimento = require('../models/movimento');
+const Produto = require('../models/produto');
+const Deposito = require('../models/estoque');
 
 
 exports.criarMovimento = (req, res) => {
-  const { id, data, tipo, quantidade, precoUnitario, produtoId, depositoId } = req.body;
+  const { id, data, tipo, quantidade, precoUnitario, produtoId, estoqueId } = req.body;
 
   Movimento.create({
     id,
@@ -13,7 +13,7 @@ exports.criarMovimento = (req, res) => {
     quantidade,
     precoUnitario,
     produtoId,
-    depositoId,
+    estoqueId,
   })
     .then((movimento) => {
       console.log('Movimento criado:', movimento.toJSON());
@@ -77,7 +77,7 @@ exports.atualizarMovimento = (req, res) => {
         quantidade,
         precoUnitario,
         produtoId,
-        depositoId,
+        estoqueId,
       });
     })
     .then((movimentoAtualizado) => {

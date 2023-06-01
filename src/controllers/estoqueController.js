@@ -1,5 +1,5 @@
-const Produto = require('./models/produto');
-const Estoque = require('./models/estoque');
+const Produto = require('../models/produto');
+const Estoque = require('../models/estoque');
 
 // Criar um novo estoque com um produto associado
 exports.criarEstoque = (req, res) => {

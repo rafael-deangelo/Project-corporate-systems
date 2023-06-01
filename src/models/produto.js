@@ -7,6 +7,7 @@
 const Sequelize = require('sequelize');
 const database = require('../db.js');
 const Movimento = require('./movimento.js');
+const detalheCompra = require('./detalhe_compra.js');
 
 const Produto = database.define('produto', {
     id:{
@@ -26,6 +27,7 @@ const Produto = database.define('produto', {
 
 // produto e estoque tem quer ser feito associação 1 para 1
 Produto.hasMany(Movimento);
+Produto.hasMany(detalheCompra);
 
 
 module.exports = Produto;
