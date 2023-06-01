@@ -1,0 +1,6 @@
+acima da classe de compra teremos uma classe orquestradora que vai englobar MOVIMENTO, COMPRA e TITULO.....
+para ela precisaremos da de uma unica controller que ira fazer o movimento de compra e gerar um titulo para nós.
+
+
+EXEMPLO!! O meu ato de compra ira movimentar um deposito e tera que me gerar um titulo ------ a partir disso sera necessario ter uma classe de 
+movimento_titulosAPagar essa classe ira olhar para os movimentos que eu devo pagar!
