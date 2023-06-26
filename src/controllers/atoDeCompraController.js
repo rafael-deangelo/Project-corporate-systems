@@ -1,4 +1,4 @@
-const AtoDeCompra = require('../models/atoDeCompra');
+const AtoDeCompra = require('../models/atoCompra');
 
 exports.criarAtoDeCompra = (req, res) => {
     const atoDeCompraData = req.body; 
