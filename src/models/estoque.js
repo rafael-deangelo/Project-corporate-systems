@@ -3,22 +3,23 @@ const database = require('../db.js');
 const Movimento = require('./movimento.js');
 
 const Estoque = database.define('estoque', {
-    id:{
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true
     },
-    nome:{
+    nome: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    filial:{
+    filial: {
         type: Sequelize.STRING,
         allowNull: true,
     }
 });
 
-// produto e estoque tem quer ser feito associação 1 para 1
-Estoque.hasMany(Movimento);
+Estoque.hasMany(Movimento, {
+    foreignKey: 'estoqueId'
+});
 
 module.exports = Estoque;

@@ -1,17 +1,23 @@
-const Produto = require("../models/produto");
-const Estoque = require("../models/estoque");
+const Produto = require('../models/produto');
+const Estoque = require('../models/estoque');
 
-// RAFA Criar um novo produto com um estoque associado
-
-exports.criarProduto = (req, res) => {
+exports.criarProduto = async (req, res) => {
   try {
-    const { nome, descricao, estoqueId } = req.body;
+    const { id, nome, descricao, estoqueId } = req.body;
 
-     Produto.create({
+    const novoProduto = await Produto.create({
+      id,
       nome,
       descricao,
       estoqueId
     });
+
+    const estoque = await Estoque.findByPk(estoqueId);
+    if (!estoque) {
+      throw new Error('Estoque não encontrado');
+    }
+
+    await novoProduto.setEstoque(estoque);
 
     console.log('Produto criado:', novoProduto.toJSON());
 
@@ -20,7 +26,10 @@ exports.criarProduto = (req, res) => {
     console.error('Erro ao criar o produto:', error);
     res.status(500).json({ error: 'Erro ao criar o produto' });
   }
-}
+};
+
+
+
 
 exports.buscarProdutos = (req, res) => {
   Produto.findAll()
