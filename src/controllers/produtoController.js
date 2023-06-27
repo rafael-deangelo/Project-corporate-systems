@@ -2,32 +2,25 @@ const Produto = require("../models/produto");
 const Estoque = require("../models/estoque");
 
 // RAFA Criar um novo produto com um estoque associado
-exports.criarProduto = (req, res) => {
-  const { nomeProduto, descricaoProduto, nomeEstoque, nomeFilial } = req.body;
 
-  Produto.create(
-    {
-      nome: nomeProduto,
-      descricao: descricaoProduto,
-      Estoque: {
-        nome: nomeEstoque,
-        filial: nomeFilial,
-      },
-    },
-    {
-      include: [Estoque],
-    }
-  )
-    .then((produto) => {
-      console.log("Produto criado:", produto.toJSON());
-      console.log("Estoque associado:", produto.Estoque.toJSON());
-      res.status(200).json({ message: "Produto criado com sucesso", produto });
-    })
-    .catch((error) => {
-      console.error("Erro ao criar o produto:", error);
-      res.status(500).json({ error: "Erro ao criar o produto" });
+exports.criarProduto = (req, res) => {
+  try {
+    const { nome, descricao, estoqueId } = req.body;
+
+     Produto.create({
+      nome,
+      descricao,
+      estoqueId
     });
-};
+
+    console.log('Produto criado:', novoProduto.toJSON());
+
+    res.status(201).json(novoProduto);
+  } catch (error) {
+    console.error('Erro ao criar o produto:', error);
+    res.status(500).json({ error: 'Erro ao criar o produto' });
+  }
+}
 
 exports.buscarProdutos = (req, res) => {
   Produto.findAll()

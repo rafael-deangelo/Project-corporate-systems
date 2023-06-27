@@ -1,23 +1,16 @@
 const Produto = require('../models/produto');
 const Estoque = require('../models/estoque');
 
-// Criar um novo estoque com um produto associado
 exports.criarEstoque = (req, res) => {
-  const { nomeEstoque, nomeFilial, nomeProduto, descricaoProduto } = req.body;
+  const { id, nome, filial } = req.body;
 
   Estoque.create({
-    nome: nomeEstoque,
-    filial: nomeFilial,
-    Produto: {
-      nome: nomeProduto,
-      descricao: descricaoProduto,
-    },
-  }, {
-    include: [Produto],
+    id: id,
+    nome: nome,
+    filial: filial
   })
     .then((estoque) => {
       console.log('Estoque criado:', estoque.toJSON());
-      console.log('Produto associado:', estoque.Produto.toJSON());
       res.status(200).json({ message: 'Estoque criado com sucesso', estoque });
     })
     .catch((error) => {

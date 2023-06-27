@@ -42,7 +42,7 @@ app.get('/clientes/:id', clienteController.buscarClientePorId);
 app.put('/clientes/:id', clienteController.atualizarCliente);
 app.delete('/clientes/:id', clienteController.excluirCliente);
 
-app.post('/CriaEstoque', estoqueController.criarEstoque);
+app.post('/criaEstoque', estoqueController.criarEstoque);
 app.get('/estoques', estoqueController.buscarEstoques);
 app.get('/estoques/:id', estoqueController.buscarEstoquePorId);
 app.put('/estoque/:id', estoqueController.atualizarEstoque);
