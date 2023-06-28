@@ -1,4 +1,3 @@
-const Produto = require('../models/produto');
 const Estoque = require('../models/estoque');
 
 exports.criarEstoque = (req, res) => {

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const database = require('../db.js');
+const Compra = require('./compra.js');
 
 const Cliente = database.define('cliente', {
     id:{
@@ -20,5 +21,7 @@ const Cliente = database.define('cliente', {
         allowNull: true,
     }
 });
+
+Cliente.hasMany(Compra); // Compra pertence a um Cliente
 
 module.exports = Cliente;
