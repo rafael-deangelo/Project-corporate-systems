@@ -36,31 +36,31 @@ app.get('/', (req, res) => {
 }
 );
 
-app.post('/criaCliente', clienteController.criarCliente);
-app.get('/clientes', clienteController.buscarClientes);
-app.get('/clientes/:id', clienteController.buscarClientePorId);
-app.put('/clientes/:id', clienteController.atualizarCliente);
-app.delete('/clientes/:id', clienteController.excluirCliente);
+app.post('/criaCliente', clienteController.criarCliente); //ok
+app.get('/clientes', clienteController.buscarClientes); //ok
+app.get('/clientes/:id', clienteController.buscarClientePorId); //ok
+app.put('/clientes/:id', clienteController.atualizarCliente); //ok
+app.delete('/clientes/:id', clienteController.excluirCliente); //ok
 
-app.post('/criaEstoque', estoqueController.criarEstoque);
-app.get('/estoques', estoqueController.buscarEstoques);
-app.get('/estoques/:id', estoqueController.buscarEstoquePorId);
-app.put('/estoque/:id', estoqueController.atualizarEstoque);
-app.delete('/estoques/:id', estoqueController.excluirEstoque);
+app.post('/criaEstoque', estoqueController.criarEstoque); //ok
+app.get('/estoques', estoqueController.buscarEstoques); //ok
+app.get('/estoques/:id', estoqueController.buscarEstoquePorId); //ok
+app.put('/estoques/:id', estoqueController.atualizarEstoque); //ok
+app.delete('/estoques/:id', estoqueController.excluirEstoque); //ok
 
-app.post('/criaMovimento', movimentoController.criarMovimento);
-app.get('/movimentos', movimentoController.buscarMovimentos);
-app.get('/movimentos/:id', movimentoController.buscarMovimentoPorId);
-app.put('/movimentos/:id', movimentoController.atualizarMovimento);
-app.delete('/movimentos/:id', movimentoController.excluirMovimento);
+app.post('/criaMovimento', movimentoController.criarMovimento); //ok
+app.get('/movimentos', movimentoController.buscarMovimentos); //ok
+app.get('/movimentos/:id', movimentoController.buscarMovimentoPorId); //ok
+app.put('/movimentos/:id', movimentoController.atualizarMovimento); //ok
+app.delete('/movimentos/:id', movimentoController.excluirMovimento); //ok
 
-app.post('/criaProduto', produtoController.criarProduto);
-app.get('/produtos', produtoController.buscarProdutos);
-app.get('/produtos/:id', produtoController.buscarProdutoPorId);
-app.put('/produtos/:id', produtoController.atualizarProduto);
-app.delete('/produtos/:id', produtoController.excluirProduto);
+app.post('/criaProduto', produtoController.criarProduto); //ok
+app.get('/produtos', produtoController.buscarProdutos); //ok
+app.get('/produtos/:id', produtoController.buscarProdutoPorId); //ok
+app.put('/produtos/:id', produtoController.atualizarProduto); //ok
+app.delete('/produtos/:id', produtoController.excluirProduto); //ok
 
-app.post('/comprar', compraController.criarCompra);
+app.post('/comprar', compraController.criarCompra); //ok
 
 app.listen(port, () => {
     console.log(`Servidor de pé na porta ${port}`)

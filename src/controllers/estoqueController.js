@@ -50,7 +50,7 @@ exports.buscarEstoquePorId = (req, res) => {
 
 exports.atualizarEstoque = (req, res) => {
   const estoqueId = req.params.id; // Obtenha o ID do estoque dos parâmetros da requisição
-  const { nome, filial } = req.body; // Obtenha os dados atualizados do corpo da requisição
+  const { id, nome, filial } = req.body; // Obtenha os dados atualizados do corpo da requisição
 
   Estoque.findByPk(estoqueId)
     .then((estoque) => {
@@ -58,10 +58,11 @@ exports.atualizarEstoque = (req, res) => {
         return res.status(404).json({ error: 'Estoque não encontrado' });
       }
 
-      return estoque.update({
-        nome: nome || estoque.nome,
-        filial: filial || estoque.filial,
-      });
+      estoque.id = id || estoque.id;
+      estoque.nome = nome || estoque.nome;
+      estoque.filial = filial || estoque.filial;
+
+      return estoque.save();
     })
     .then((estoqueAtualizado) => {
       console.log('Estoque atualizado:', estoqueAtualizado.toJSON());
@@ -72,6 +73,7 @@ exports.atualizarEstoque = (req, res) => {
       res.status(500).json({ error: 'Erro ao atualizar estoque' });
     });
 };
+
 
 exports.excluirEstoque = (req, res) => {
   const estoqueId = req.params.id; // Obtenha o ID do estoque dos parâmetros da requisição

@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const database = require("../db.js");
 
+
 const Compra = database.define("compra", {
   id: {
     type: Sequelize.INTEGER,
@@ -21,4 +22,5 @@ const Compra = database.define("compra", {
   },
 });
 
-module.exports = Compra;
+
+module.exports = Compra

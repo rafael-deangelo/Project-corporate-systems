@@ -77,7 +77,7 @@ exports.atualizarMovimento = (req, res) => {
         quantidade,
         precoUnitario,
         produtoId,
-        estoqueId,
+        estoqueId: depositoId, // Corrigir para atribuir o valor de depositoId a estoqueId
       });
     })
     .then((movimentoAtualizado) => {
