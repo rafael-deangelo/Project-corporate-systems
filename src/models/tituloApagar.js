@@ -1,12 +1,14 @@
 const Sequelize = require("sequelize");
 const database = require("../db.js");
-const Compra = require('./compra.js')
+const Compra = require('./compra.js');
+const Cliente = require('./cliente.js');
 
 const TituloAPagar = database.define("titulo_a_pagar", {
   id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true,
   },
   valor: {
     type: Sequelize.FLOAT,
@@ -22,6 +24,7 @@ const TituloAPagar = database.define("titulo_a_pagar", {
   },
 });
 
-TituloAPagar.belongsTo(Compra); // Estabelece a relação entre Título a Pagar e Compra
+TituloAPagar.belongsTo(Compra, {foreignKey: 'compraId'});
+TituloAPagar.belongsTo(Cliente);
 
 module.exports = TituloAPagar;

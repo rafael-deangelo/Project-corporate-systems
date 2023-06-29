@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-//const auth = require ('./auth.js');
+
 const clienteController = require('./controllers/clienteController');
 const estoqueController = require('./controllers/estoqueController');
 const movimentoController = require('./controllers/movimentoController');
 const produtoController = require('./controllers/produtoController');
 const compraController = require('./controllers/compraController');
+const tituloAPagarController = require('../controllers/tituloAPagarController');
 
 require('dotenv').config();
 
@@ -62,20 +63,10 @@ app.delete('/produtos/:id', produtoController.excluirProduto);
 
 app.post('/comprar', compraController.criarCompra); 
 
+app.put('/titulos/:id/pagar', tituloAPagarController.atualizarStatusEPagar);
+
 app.listen(port, () => {
     console.log(`Servidor de pé na porta ${port}`)
 });
 
 
-
-//podemos usar mais pra frente para autenticacao
-// app.post('/login', (req,res) => {
-//     const user = req.body;
-//     auth.autentica(user);
-//     res.send(user);
-// });
-
-// app.post('/user/save', auth.verificaToken, (req,res) => {
-//     console.log('Autenticou')
-//     res.send('ok');
-// });
