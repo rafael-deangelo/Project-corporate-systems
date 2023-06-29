@@ -110,12 +110,3 @@ exports.excluirMovimento = (req, res) => {
       res.status(500).json({ error: 'Erro ao excluir movimento' });
     });
 };
-
-// EXEMPLO DE JSON{
-//   "data": "2023-05-18T10:30:00Z",
-//   "tipo": "Entrada",
-//   "quantidade": 5,
-//   "precoUnitario": 10.99,
-//   "produtoId": 1,
-//   "depositoId": 1
-// }

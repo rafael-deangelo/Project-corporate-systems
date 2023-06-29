@@ -109,13 +109,6 @@ exports.excluirProduto = (req, res) => {
     });
 };
 
-// EXEMPLO DE JSON{
-//   "nome": "Nome do produto",,
-//   "descricao": "Descrição do produto",
-//   "Estoque": {
-//     "nome": "Nome do estoque",
-//     "filial": "Descrição da filial"
-//   }
-// }
+
 
 

@@ -8,12 +8,11 @@ exports.criarCompra = (req, res) => {
     .then((novaCompra) => {
       console.log('Ato de Compra criado:', novaCompra);
 
-      // Criação automática de um título a pagar correspondente
       TituloAPagar.create({
         id: novaCompra.id,
-        valor: 100.0, // Preencha com o valor adequado da compra
-        dataVencimento: new Date(), // Preencha com a data de vencimento desejada
-        statusPagamento: 'Pendente', // Preencha com o status inicial adequado
+        valor: 100.0, 
+        dataVencimento: new Date(), 
+        statusPagamento: 'Pendente', 
       })
         .then((novoTituloAPagar) => {
           console.log('Título a Pagar criado:', novoTituloAPagar);

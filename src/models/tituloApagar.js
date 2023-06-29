@@ -24,4 +24,4 @@ const TituloAPagar = database.define("titulo_a_pagar", {
 
 TituloAPagar.belongsTo(Compra); // Estabelece a relação entre Título a Pagar e Compra
 
-module.exports = { Compra, TituloAPagar };
+module.exports = TituloAPagar;

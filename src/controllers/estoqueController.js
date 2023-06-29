@@ -92,12 +92,3 @@ exports.excluirEstoque = (req, res) => {
       res.status(500).json({ error: 'Erro ao excluir estoque' });
     });
 };
-
-// EXEMPLO DE JSON{
-//   "nome": "Nome do estoque",
-//   "filial": "Nome da filial",
-//   "Produto": {
-//     "nome": "Nome do produto",
-//     "descricao": "Descrição do produto"
-//   }
-// }
