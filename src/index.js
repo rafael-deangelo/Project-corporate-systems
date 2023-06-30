@@ -7,7 +7,7 @@ const estoqueController = require('./controllers/estoqueController');
 const movimentoController = require('./controllers/movimentoController');
 const produtoController = require('./controllers/produtoController');
 const compraController = require('./controllers/compraController');
-const tituloAPagarController = require('../controllers/tituloAPagarController');
+const tituloAPagarController = require('./controllers/tituloAPagarController');
 
 require('dotenv').config();
 
